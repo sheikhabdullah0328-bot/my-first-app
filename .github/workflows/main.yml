@@ -22,7 +22,8 @@ jobs:
     - name: Build Debug APK
       run: |
         gradle wrapper --gradle-version 8.5
-        ./gradlew assembleDebug --no-daemon -Dorg.gradle.project.build.directory=build
+        chmod +x gradlew
+        ./gradlew assembleDebug --no-daemon -Dksp.incremental=false -Dkotlin.compiler.execution.strategy="in-process" -x validateSigningDebug
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
