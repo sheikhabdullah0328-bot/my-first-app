@@ -16,11 +16,13 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Setup Gradle
+    - name: Setup Gradle 8.5
       uses: gradle/actions/setup-gradle@v3
+      with:
+        gradle-version: '8.5'
 
-    - name: Build APK Clean
-      run: gradle assembleDebug -Dksp.incremental=false -Dkotlin.compiler.execution.strategy="in-process" -x validateSigningDebug --no-daemon
+    - name: Build Debug APK
+      run: gradle assembleDebug --no-daemon --no-configuration-cache
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
